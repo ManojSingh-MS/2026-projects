@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Store Sales Prediction</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#CFEAFC;
+    margin:30px;
+}
+
+.container{
+    width:700px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px gray;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.field{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    font-size:16px;
+}
+
+button{
+    padding:10px 25px;
+    font-size:16px;
+    cursor:pointer;
+    border:none;
+    border-radius:5px;
+}
+
+.predict{
+    background:#00d084;
+}
+
+.reset{
+    background:#d63031;
+    color:white;
+    margin-left:10px;
+}
+
+.result{
+
+    margin-top:30px;
+    padding:20px;
+    border:2px solid #cccccc;
+    border-radius:8px;
+    background:#f8f8f8;
+
+}
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+td{
+
+    padding:8px;
+    border-bottom:1px solid #dddddd;
+
+}
+
+h2{
+
+    text-align:center;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Store Sales Prediction</h1>
+
+<form action="/predict" method="POST">
+
+<div class="field">
+
+<label>Enter Test Dataset Row Number (0 - 28511)</label>
+
+<input
+type="number"
+name="row_no"
+min="0"
+max="28511"
+required>
+
+</div>
+
+<button class="predict" type="submit">
+Predict Sales
+</button>
+
+<button class="reset" type="reset">
+Reset
+</button>
+
+</form>
+
+
+{% if row is defined %}
+
+<div class="result">
+
+<h2>Selected Row Details</h2>
+
+<table>
+
+<tr>
+<td><b>Store Number</b></td>
+<td>{{ row.store_nbr }}</td>
+</tr>
+
+<tr>
+<td><b>Product Category</b></td>
+<td>{{ row.family }}</td>
+</tr>
+
+<tr>
+<td><b>Products on Promotion</b></td>
+<td>{{ row.onpromotion }}</td>
+</tr>
+
+<tr>
+<td><b>City</b></td>
+<td>{{ row.city }}</td>
+</tr>
+
+<tr>
+<td><b>State</b></td>
+<td>{{ row.state }}</td>
+</tr>
+
+<tr>
+<td><b>Store Type</b></td>
+<td>{{ row.type }}</td>
+</tr>
+
+<tr>
+<td><b>Cluster</b></td>
+<td>{{ row.cluster }}</td>
+</tr>
+
+<tr>
+<td><b>WTI Crude Oil Price</b></td>
+<td>{{ row.dcoilwtico }}</td>
+</tr>
+
+<tr>
+<td><b>Transactions</b></td>
+<td>{{ row.transactions }}</td>
+</tr>
+
+<tr>
+<td><b>Holiday</b></td>
+<td>{{ row.is_holiday }}</td>
+</tr>
+
+<tr>
+<td><b>Year</b></td>
+<td>{{ row.year }}</td>
+</tr>
+
+<tr>
+<td><b>Month</b></td>
+<td>{{ row.month }}</td>
+</tr>
+
+<tr>
+<td><b>Day</b></td>
+<td>{{ row.day }}</td>
+</tr>
+
+<tr>
+<td><b>Day of Week</b></td>
+<td>{{ row.day_of_week }}</td>
+</tr>
+
+<tr>
+<td><b>Quarter</b></td>
+<td>{{ row.quarter }}</td>
+</tr>
+
+<tr>
+<td><b>Weekend</b></td>
+<td>{{ row.is_weekend }}</td>
+</tr>
+
+</table>
+
+</div>
+
+{% endif %}
+
+
+{% if prediction is defined %}
+
+<div class="result">
+
+<h2>
+
+Predicted Sales
+
+</h2>
+
+<h1>
+
+${{ prediction }}
+
+</h1>
+
+</div>
+
+{% endif %}
+
+
+</div>
+
+</body>
+
+</html>
